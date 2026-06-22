@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishab Joshi — GTM Engineer for Rockstar Games</title>
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --card: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #5c5656;
+      --line: #e5e0d8;
+      --accent: #c0392b;
+      --accent-soft: #fdf0ed;
+      --accent-dark: #922b21;
+      --shadow: 0 18px 44px rgba(24, 20, 18, 0.07);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 26px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-pill {
+      border: 1px solid var(--line);
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .hero {
+      padding: 64px 0 38px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      background: var(--accent-soft);
+      border: 1px solid #f1cdc7;
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+      margin: 0 0 20px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 26px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -70px -50px auto auto;
+      width: 160px;
+      height: 160px;
+      background: rgba(192, 57, 43, 0.12);
+      border-radius: 999px;
+      z-index: -1;
+    }
+
+    .mini-title {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal {
+      padding: 14px;
+      border-radius: 16px;
+      background: #fbfaf8;
+      border: 1px solid var(--line);
+    }
+
+    .signal strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .signal span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 50px 0;
+    }
+
+    .section-head {
+      max-width: 740px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      margin: 0 0 14px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .notice {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 26px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 28px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .notice p {
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 17px;
+    }
+
+    .notice h2 {
+      color: #fff;
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(24, 20, 18, 0.04);
+    }
+
+    .card h3 {
+      font-size: 21px;
+      letter-spacing: -0.035em;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .campaign {
+      display: grid;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .campaign .number {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--ink);
+      color: white;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .campaign dl {
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .campaign dt {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 900;
+    }
+
+    .campaign dd {
+      margin: 2px 0 0;
+      font-weight: 650;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .step::before {
+      content: counter(step);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 950;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+
+    .step span {
+      color: var(--muted);
+    }
+
+    .deliverables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .deliverables span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 14px;
+      font-weight: 750;
+      color: #3a3230;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c1f1b 100%);
+      border-radius: 32px;
+      padding: 44px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      right: -50px;
+      top: -70px;
+      border-radius: 999px;
+      background: rgba(192, 57, 43, 0.32);
+    }
+
+    .cta h2 {
+      color: #fff;
+      max-width: 740px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.76);
+      font-size: 18px;
+      max-width: 660px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta .btn {
+      background: #fff;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+    }
+
+    .footer {
+      padding: 32px 0 50px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .notice,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .cta {
+        padding: 30px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="container nav">
+      <a href="#" class="brand">Rishab Joshi</a>
+      <nav class="nav-links">
+        <a href="#ideas">Campaign Ideas</a>
+        <a href="#work">How I Work</a>
+        <a href="#samples" class="nav-pill">Sample Docs</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Built specifically for Rockstar Games</div>
+            <h1>GTM Engineer focused on research, signals, and campaign development.</h1>
+            <p>
+              I help teams do the heavy research work that makes campaigns sharper before launch: signal sourcing, audience mapping, account research, and campaign docs that are ready for copy and creative teams to run with.
+            </p>
+            <div class="hero-actions">
+              <a href="#ideas" class="btn btn-primary">See campaign ideas</a>
+              <a href="mailto:leadgenrishab@gmail.com?subject=Sample GTM docs for Rockstar Games" class="btn btn-secondary">Ask for sample docs</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <div class="mini-title">Where I can help</div>
+            <div class="signal-list">
+              <div class="signal">
+                <strong>Campaign research</strong>
+                <span>Find the signals, moments, and triggers that make outreach feel relevant instead of random.</span>
+              </div>
+              <div class="signal">
+                <strong>Audience building</strong>
+                <span>Build cleaner lists by segment, behavior, platform, and buying signal instead of generic demographics.</span>
+              </div>
+              <div class="signal">
+                <strong>Workflow automation</strong>
+                <span>Set up Clay and Make workflows that handle enrichment, scoring, and routing so teams spend time on strategy.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="notice">
+            <h2>I studied what Rockstar Games already does.</h2>
+            <p>
+              Rockstar Games is one of the most recognized names in entertainment, with a massive player base across GTA Online, Red Dead Online, and the Rockstar Games Launcher. The merchandising arm, the CircoLoco Records label, and the upcoming Grand Theft Auto VI release all point to a company with deep audience engagement and multiple surfaces for growth. I wanted to understand how the pieces fit together before reaching out.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="ideas">
+        <div class="container">
+          <div class="section-head">
+            <h2>3 campaign ideas I would test for Rockstar Games</h2>
+            <p>
+              These are not final strategies. They are examples of how I think through sourcing, signals, and outreach angles.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card campaign">
+              <div>
+                <div class="number">1</div>
+                <span class="tag">Homepage & Newswire</span>
+                <h3>Grand Theft Auto VI Pre-Order Campaign</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Source</dt>
+                  <dd>Homepage carousel and newswire announcements.</dd>
+                </div>
+                <div>
+                  <dt>Signal</dt>
+                  <dd>Pre-orders begin on June 25, 2026, with a dedicated "Learn More" CTA already live on the site.</dd>
+                </div>
+                <div>
+                  <dt>Why it works</dt>
+                  <dd>The anticipation for a major franchise release is already high. Early purchase incentives combined with exclusive content create a natural urgency that converts interest into commitment before launch day.</dd>
+                </div>
+                <div>
+                  <dt>Outreach angle</dt>
+                  <dd>Promote pre-order bonuses and exclusive content to incentivize early purchases across email, launcher notifications, and social channels.</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="card campaign">
+              <div>
+                <div class="number">2</div>
+                <span class="tag">Newswire & GTA Online Section</span>
+                <h3>GTA Online In-Game Event Promotions</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Source</dt>
+                  <dd>Newswire articles and the "Jump Into GTA Online" section on the homepage.</dd>
+                </div>
+                <div>
+                  <dt>Signal</dt>
+                  <dd>Regular updates on new content like "A Safehouse in the Hills" and "The Next Big Score" are being published consistently.</dd>
+                </div>
+                <div>
+                  <dt>Why it works</dt>
+                  <dd>Fresh content keeps the existing player base engaged and gives lapsed players a reason to return. Limited-time rewards create a fear of missing out that drives re-engagement.</dd>
+                </div>
+                <div>
+                  <dt>Outreach angle</dt>
+                  <dd>Highlight limited-time rewards and new gameplay features through automated email sequences and launcher notifications to drive re-engagement.</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="card campaign">
+              <div>
+                <div class="number">3</div>
+                <span class="tag">Rockstar Store Section</span>
+                <h3>Rockstar Games Store Merchandise Push</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Source</dt>
+                  <dd>Dedicated "Store" section on the homepage with prominent links to new arrivals, apparel, collectibles, and accessories.</dd>
+                </div>
+                <div>
+                  <dt>Signal</dt>
+                  <dd>The store is prominently featured with clear navigation paths for different product categories.</dd>
+                </div>
+                <div>
+                  <dt>Why it works</dt>
+                  <dd>Brand loyalty extends beyond the screen. Physical goods let fans carry the experience into their daily lives. New merchandise drops and limited-edition items create urgency and give collectors a reason to check back regularly.</dd>
+                </div>
+                <div>
+                  <dt>Outreach angle</dt>
+                  <dd>Feature new merchandise drops and limited-edition items through email campaigns and targeted social ads to create urgency and drive store traffic.</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="work">
+        <div class="container">
+          <div class="section-head">
+            <h2>How I would support the team</h2>
+            <p>
+              My role would be to handle the research and workflow building so senior teams can focus on creative direction and strategy.
+            </p>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <div>
+                <strong>Define the campaign objective and audience segment</strong>
+                <span>For example: GTA VI pre-order prospects, lapsed GTA Online players, or merchandise buyers segmented by franchise affinity.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Research signals and behavioral triggers</strong>
+                <span>Find the events, platform activity, purchase history, content engagement patterns, and seasonal moments that indicate readiness to act.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Build and enrich the audience list</strong>
+                <span>Use the signal criteria, enrich key fields, map personas, and document why each segment fits the campaign objective.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Create a campaign research doc</strong>
+                <span>Include audience definition, signal sources, timing rationale, offer angle, sample messaging, potential objections, and enrichment notes.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Hand it to creative and marketing teams</strong>
+                <span>The team can refine the angle, approve the audience, and launch without starting from a blank page.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="samples">
+        <div class="container">
+          <div class="section-head">
+            <h2>Sample work I can send</h2>
+            <p>
+              I would rather show how I think than spend time pitching myself.
+            </p>
+          </div>
+
+          <div class="deliverables">
+            <span>3 campaign ideas for Rockstar Games</span>
+            <span>1 sample audience segment</span>
+            <span>1 campaign research doc</span>
+            <span>1 pre-order funnel optimization outline</span>
+            <span>1 GTA Online re-engagement workflow</span>
+            <span>1 merchandise store analytics plan</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="cta">
+            <h2>I would love to show how I think by sending over a few sample campaign docs built around what Rockstar Games is already doing.</h2>
+            <p>
+              If it is useful, great. If not, no hard feelings. I just wanted to put something real in front of you instead of a generic pitch.
+            </p>
+            <a href="mailto:leadgenrishab@gmail.com?subject=Send sample GTM docs&body=Hey Rishab,%0D%0A%0D%0ACan you send over the sample campaign docs you built for Rockstar Games?" class="btn">
+              Send me the sample docs
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <div class="footer-inner">
+        <div>Built by Rishab Joshi — GTM Engineer</div>
+        <div><a href="https://www.linkedin.com/in/rishabxjoshi/" target="_blank" style="color:inherit">LinkedIn</a> · <a href="mailto:leadgenrishab@gmail.com" style="color:inherit">leadgenrishab@gmail.com</a></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
