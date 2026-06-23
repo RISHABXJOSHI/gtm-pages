@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTM Engineer for Coldfront Agency</title>
+  <style>
+    :root {
+      --bg: #f9f8f6;
+      --card: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #5c5c5c;
+      --line: #e6e1d9;
+      --accent: #2563eb;
+      --accent-soft: #eef2ff;
+      --accent-dark: #1d4ed8;
+      --green: #0d9488;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-pill {
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .hero {
+      padding: 72px 0 42px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--accent-soft);
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+      margin: 0 0 22px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 0 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.75);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 26px;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -70px -50px auto auto;
+      width: 160px;
+      height: 160px;
+      background: rgba(37, 99, 235, 0.12);
+      border-radius: 999px;
+      z-index: -1;
+    }
+
+    .mini-title {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal {
+      padding: 14px;
+      border-radius: 16px;
+      background: #fafaf8;
+      border: 1px solid var(--line);
+    }
+
+    .signal strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .signal span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: clamp(32px, 5vw, 50px);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      margin: 0 0 14px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .notice {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 28px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 28px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .notice p {
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 17px;
+    }
+
+    .notice h2 {
+      color: #fff;
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      letter-spacing: -0.035em;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .proof {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .proof .name {
+      font-weight: 850;
+      margin-bottom: 8px;
+      letter-spacing: -0.025em;
+    }
+
+    .proof .metric {
+      color: var(--green);
+      font-weight: 850;
+      font-size: 15px;
+    }
+
+    .campaign {
+      display: grid;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .campaign .number {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--ink);
+      color: white;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .campaign dl {
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .campaign dt {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 900;
+    }
+
+    .campaign dd {
+      margin: 2px 0 0;
+      font-weight: 650;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .step::before {
+      content: counter(step);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 950;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+
+    .step span {
+      color: var(--muted);
+    }
+
+    .deliverables {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .deliverables span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 14px;
+      font-weight: 750;
+      color: #2d2d2d;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #1a1a1a 0%, #1e293b 100%);
+      border-radius: 34px;
+      padding: 44px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -60px;
+      top: -80px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.3);
+    }
+
+    .cta h2 {
+      color: #fff;
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,0.76);
+      font-size: 18px;
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta .btn {
+      background: #fff;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+    }
+
+    .footer {
+      padding: 32px 0 54px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .notice,
+      .grid-3,
+      .grid-2,
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .cta {
+        padding: 30px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="container nav">
+      <a href="#" class="brand">Rishab Joshi</a>
+      <nav class="nav-links">
+        <a href="#ideas">Campaign Ideas</a>
+        <a href="#work">How I Work</a>
+        <a href="#samples" class="nav-pill">Sample Docs</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Built for Coldfront Agency</div>
+            <h1>GTM Engineer who builds the research layer before campaigns launch.</h1>
+            <p>
+              I focus on the upstream work that makes outbound campaigns sharper: account research, ICP refinement, signal sourcing, Clay workflows, and campaign prep docs. Coldfront already runs strong campaigns. I want to help the team move faster from idea to inbox.
+            </p>
+            <div class="hero-actions">
+              <a href="#ideas" class="btn btn-primary">See campaign ideas for Coldfront</a>
+              <a href="mailto:leadgenrishab@gmail.com?subject=Sample GTM docs for Coldfront" class="btn btn-secondary">Ask for sample docs</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <div class="mini-title">Where I can contribute</div>
+            <div class="signal-list">
+              <div class="signal">
+                <strong>ICP research and list building</strong>
+                <span>Build cleaner account lists by industry, revenue signals, tech stack, and buying intent before enrichment starts.</span>
+              </div>
+              <div class="signal">
+                <strong>Signal sourcing and trigger detection</strong>
+                <span>Find hiring patterns, funding events, tool changes, competitor dissatisfaction, and expansion signals that indicate outreach readiness.</span>
+              </div>
+              <div class="signal">
+                <strong>Campaign prep and workflow automation</strong>
+                <span>Turn research into structured campaign briefs, Clay tables, Make automations, and ready-to-launch sequences.</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="notice">
+            <h2>I studied what Coldfront already does.</h2>
+            <p>
+              Coldfront runs cold outbound and LinkedIn lead generation for B2B agencies and SaaS companies doing $20K+ per month. The team already handles TAM mapping, campaign copy, AI enrichment, infrastructure setup, and reply management across 19+ industries. I am not here to pitch a better service. I am here to show how I would support the research and operations layer that makes those campaigns run.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-head">
+            <h2>What I noticed from the case studies</h2>
+            <p>
+              The strongest results come from tight targeting, niche relevance, and high reply rates on small, curated lists. Here are a few that stood out.
+            </p>
+          </div>
+
+          <div class="proof-grid">
+            <div class="proof">
+              <div class="name">HR Tech company</div>
+              <div class="metric">$700K pipeline from one campaign</div>
+            </div>
+            <div class="proof">
+              <div class="name">Marketing Services company</div>
+              <div class="metric">536 opportunities generated</div>
+            </div>
+            <div class="proof">
+              <div class="name">Talent Agency</div>
+              <div class="metric">100% positive reply rate</div>
+            </div>
+            <div class="proof">
+              <div class="name">IT Services company</div>
+              <div class="metric">27 opportunities from 9,978 contacts</div>
+            </div>
+            <div class="proof">
+              <div class="name">Amazon Optimization company</div>
+              <div class="metric">29.41% positive reply rate</div>
+            </div>
+            <div class="proof">
+              <div class="name">LinkedIn Branding company</div>
+              <div class="metric">767 connections accepted</div>
+            </div>
+            <div class="proof">
+              <div class="name">SaaS company (Re-engagement)</div>
+              <div class="metric">6.7% reply rate on old leads</div>
+            </div>
+            <div class="proof">
+              <div class="name">Sleep Tracking SaaS</div>
+              <div class="metric">16.67% positive reply rate</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ideas">
+        <div class="container">
+          <div class="section-head">
+            <h2>3 campaign ideas I would test for Coldfront</h2>
+            <p>
+              These are not final strategies. They show how I think through sourcing, enrichment, and angle development based on what is already working.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card campaign">
+              <div>
+                <div class="number">1</div>
+                <span class="tag">LinkedIn + Clay enrichment</span>
+                <h3>LinkedIn connection request sequence with Clay-based account research</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Source</dt>
+                  <dd>LinkedIn Branding case studies showing 27-53% acceptance rates and high message reply volume.</dd>
+                </div>
+                <div>
+                  <dt>Signal</dt>
+                  <dd>Founders and small teams actively posting or engaging on LinkedIn indicate openness to conversation.</dd>
+                </div>
+                <div>
+                  <dt>Why it works</dt>
+                  <dd>LinkedIn outreach removes the cold email deliverability variable entirely. When the connection request references something specific about their business, acceptance rates climb and replies stay positive.</dd>
+                </div>
+                <div>
+                  <dt>Outreach angle</dt>
+                  <dd>Send a connection request mentioning a recent post, hire, or company milestone. Follow with a DM sequence that references Coldfront's results in their industry without pitching immediately.</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="card campaign">
+              <div>
+                <div class="number">2</div>
+                <span class="tag">Re-engagement workflow</span>
+                <h3>Re-engagement campaign for dormant leads across existing client lists</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Source</dt>
+                  <dd>SaaS Re-engagement case study with 6.7% reply rate from 1,318 mid-funnel contacts.</dd>
+                </div>
+                <div>
+                  <dt>Signal</dt>
+                  <dd>Leads who engaged previously but did not convert still have context about the brand. Time passing creates a natural reason to reconnect.</dd>
+                </div>
+                <div>
+                  <dt>Why it works</dt>
+                  <dd>Warm audiences convert at higher rates than cold contacts. A re-engagement sequence that acknowledges the past interaction and offers something new feels helpful rather than intrusive.</dd>
+                </div>
+                <div>
+                  <dt>Outreach angle</dt>
+                  <dd>Segment old leads by original interest or industry. Send a short sequence that references the previous touchpoint and shares a relevant case study or new capability since the last conversation.</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="card campaign">
+              <div>
+                <div class="number">3</div>
+                <span class="tag">Micro-niche targeting</span>
+                <h3>Hyper-targeted niche campaigns for underserved verticals</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Source</dt>
+                  <dd>Sleep Tracking SaaS and Video as a Service case studies with 15-16.67% positive reply rates from very small lists.</dd>
+                </div>
+                <div>
+                  <dt>Signal</dt>
+                  <dd>Industries like sleep tech, waste management, or credit unions have specific pain points that generic outreach misses entirely.</dd>
+                </div>
+                <div>
+                  <dt>Why it works</dt>
+                  <dd>When messaging aligns perfectly with a niche problem, relevance drives engagement far beyond what broad campaigns achieve. Small, curated lists with industry-specific language outperform large blasts.</dd>
+                </div>
+                <div>
+                  <dt>Outreach angle</dt>
+                  <dd>Identify a micro-niche within Coldfront's 19+ industries served. Build a list of 150-300 accounts, research their specific challenges, and write copy that sounds like it was written only for them.</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="work">
+        <div class="container">
+          <div class="section-head">
+            <h2>How I would support the Coldfront team</h2>
+            <p>
+              My role would be to handle the research and operational prep so senior team members can focus on strategy, client relationships, and campaign optimization.
+            </p>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <div>
+                <strong>Research the target vertical and ICP</strong>
+                <span>Map the industry, identify decision-maker personas, find buying triggers, and document what signals indicate readiness for outreach.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Source and enrich account lists</strong>
+                <span>Use Clay, Apollo, LeadMagic, and Apify to build clean lists with verified contact data. Score accounts for ICP fit before enrichment to keep costs low.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Build automated workflows in Make and Clay</strong>
+                <span>Create automations for lead scoring, data enrichment, list segmentation, and hand-off triggers between research and outreach tools.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Prepare campaign research docs</strong>
+                <span>Deliver structured briefs with ICP definition, signal sources, outreach angles, sample copy, objection handling notes, and enrichment methodology.</span>
+              </div>
+            </div>
+
+            <div class="step">
+              <div>
+                <strong>Hand off to campaign and client teams</strong>
+                <span>The team gets a launch-ready foundation. They refine the angle, approve the list, and run the campaign without starting from scratch.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="samples">
+        <div class="container">
+          <div class="section-head">
+            <h2>Sample work I can send</h2>
+            <p>
+              I would rather show how I think than overexplain it.
+            </p>
+          </div>
+
+          <div class="deliverables">
+            <span>3 campaign ideas for Coldfront</span>
+            <span>1 sample account list with enrichment</span>
+            <span>1 campaign research doc</span>
+            <span>1 Clay workflow for ICP scoring</span>
+            <span>1 Make automation for lead routing</span>
+            <span>1 sample email sequence</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="cta">
+            <h2>I would like to show how I think, not pitch myself.</h2>
+            <p>
+              If it is useful, I can send over a few sample campaign docs built around Coldfront's existing case studies, ICPs, and the industries you already serve.
+            </p>
+            <a href="mailto:leadgenrishab@gmail.com?subject=Send sample GTM docs&body=Hey Rishab,%0D%0A%0D%0ACan you send over the sample campaign docs you built for Coldfront?" class="btn">
+              Send me the sample docs
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <div class="footer-inner">
+        <div>Built by Rishab Joshi — GTM Engineer | Outbound Systems & Research</div>
+        <div><a href="https://www.linkedin.com/in/rishabxjoshi/" target="_blank" style="color:inherit">LinkedIn</a> · <a href="mailto:leadgenrishab@gmail.com" style="color:inherit">leadgenrishab@gmail.com</a></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
